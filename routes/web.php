@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/articles', 'ArticleController', ['only'
+    => ['create', 'store', 'edit', 'update', 'destroy']]);
