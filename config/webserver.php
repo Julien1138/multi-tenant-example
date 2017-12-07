@@ -39,7 +39,7 @@ return [
         /**
          * Whether the integration with Apache2 is currently active.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /**
          * Define the ports of your Apache service.
@@ -118,7 +118,7 @@ return [
         /**
          * Whether the integration with Nginx is currently active.
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /**
          * The php sock to be used.
@@ -177,15 +177,16 @@ return [
                 /**
                  * Action that asserts Apache2 is installed.
                  */
-                'exists' => '/etc/init.d/nginx',
+                'exists' => 'sudo -u vagrant /etc/init.d/nginx',
                 /**
                  * Action to run to test the apache configuration.
                  */
-                'test-config' => '/etc/init.d/nginx configtest',
+                'test-config' => 'sudo /etc/init.d/nginx configtest',
                 /**
                  * Action to run to reload the apache service.
                  */
-                'reload' => 'systemctl restart nginx'
+                // 'reload' => 'sudo systemctl restart nginx'
+                'reload' => 'sudo /usr/sbin/service nginx reload'   // add "www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/service nginx reload" in visudo
             ]
         ]
     ]

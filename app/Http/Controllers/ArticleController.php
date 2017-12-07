@@ -8,6 +8,38 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show all of the ressources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return view('articles.show');
+    }
+    
+    /**
+     * Show a list of all the blogs (= all the sites)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $articles = Article::all();
+
+        return view('articles.index', compact('articles'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

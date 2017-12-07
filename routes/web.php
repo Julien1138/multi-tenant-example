@@ -12,12 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::domain(config('tenancy.hostname.default'))->group(function () {
+    Route::get('/home', 'BlogController@index')->name('home');
+});
 
-Route::resource('/articles', 'ArticleController', ['only'
-    => ['create', 'store', 'edit', 'update', 'destroy']]);
+Route::get('/home', 'ArticleController@index')->name('home');
+
+Route::resource('/blogs', 'BlogController');
+Route::resource('/articles', 'ArticleController');
